@@ -7,7 +7,6 @@ import (
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/gocolly/colly"
-	_ "github.com/mattn/go-sqlite3"
 )
 
 func getData(links []string) []Item {

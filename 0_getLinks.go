@@ -3,7 +3,6 @@ package main
 import (
 	"strings"
 	"github.com/gocolly/colly"
-	_ "github.com/mattn/go-sqlite3"
 )
 
 func getLinks(conf Config) []string {

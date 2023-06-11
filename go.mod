@@ -6,7 +6,6 @@ require (
 	github.com/BurntSushi/toml v1.3.2
 	github.com/PuerkitoBio/goquery v1.8.1
 	github.com/gocolly/colly v1.2.0
-	github.com/mattn/go-sqlite3 v1.14.17
 	github.com/tealeg/xlsx v1.0.5
 )
 

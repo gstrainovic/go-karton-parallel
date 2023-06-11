@@ -1,12 +1,12 @@
 package main
 
 import (
-    "fmt"
-    "os"
-    "sync"
-    "time"
+	"fmt"
+	"os"
+	"sync"
+	"time"
 
-    "github.com/BurntSushi/toml"
+	"github.com/BurntSushi/toml"
 )
 
 type Item struct {
@@ -26,7 +26,8 @@ type Config struct {
 }
 
 func main() {
-    b, err := os.ReadFile("./config.toml")
+
+    b, err := os.ReadFile("config.toml")
     if err != nil {
         panic(err)
     }
