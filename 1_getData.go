@@ -18,8 +18,30 @@ func getData(links []string) []Item {
 
 	collector.OnHTML("h1", func(e *colly.HTMLElement) {
 		title := e.Text
+		sku := e.DOM.ParentsUntil("~").Find("p.product-sku span").Text()
+		
+		// find the number in cUNNummer id
+		piecesPerPaletteStr := e.DOM.ParentsUntil("~").Find("#cUNNummer").Text()
+		// remove all non-numeric characters
+		piecesPerPaletteStr = strings.Map(func(r rune) rune {
+			if r < '0' || r > '9' {
+				return -1
+			}
+			return r
+		}, piecesPerPaletteStr)
 
-		var valuesArray []Value
+
+		piecesPerPalette := 0
+		if piecesPerPaletteStr != "" {
+			var err error
+			piecesPerPalette, err = strconv.Atoi(strings.Split(piecesPerPaletteStr, " ")[0])
+			if err != nil {
+				log.Println("Error parsing piecesPerPalette with the string:", piecesPerPaletteStr, "\nError:", err)
+			}
+		}
+
+
+		var valuesArray []Value 
 
 		tableRows := e.DOM.ParentsUntil("~").Find("table tr")
 
@@ -27,7 +49,7 @@ func getData(links []string) []Item {
 			columns := element.Find("td")
 
 			linkText := columns.Eq(0).Text()
-			value := strings.Split(columns.Eq(1).Text(), " ")[0]
+			value := strings.Split(columns.Eq(2).Text(), " ")[0]
 
 			if linkText == "" || value == "" {
 				return
@@ -53,8 +75,10 @@ func getData(links []string) []Item {
 
 		if len(valuesArray) > 0 && title != "" {
 			returnArray = append(returnArray, Item{
-				Title:  title,
-				Values: valuesArray,
+				Title:            title,
+				Sku:              sku,
+				PiecesPerPalette: piecesPerPalette,
+				Values:           valuesArray,
 			})
 		}
 	})

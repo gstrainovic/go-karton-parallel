@@ -25,6 +25,9 @@ func saveData(
 	// Add the header row
 	headerRow := sheet.AddRow()
 	headerRow.AddCell().SetValue("H1")
+	headerRow.AddCell().SetValue("Artikelnummer")
+	headerRow.AddCell().SetValue("Stückzahl pro Palette")
+	
 	linkTexts := getSortedLinkTexts(returnArray)
 	for _, linkText := range linkTexts {
 		headerRow.AddCell().SetValue(strconv.Itoa(linkText))
@@ -34,6 +37,8 @@ func saveData(
 	for _, item := range returnArray {
 		dataRow := sheet.AddRow()
 		dataRow.AddCell().SetValue(item.Title)
+		dataRow.AddCell().SetValue(item.Sku)
+		dataRow.AddCell().SetValue(item.PiecesPerPalette)
 
 		// Initialize the values map
 		valuesMap := make(map[int]float64)
