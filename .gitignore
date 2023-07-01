@@ -1,2 +1,5 @@
 *.xlsx
 .DS_Store
+.env
+secrets.toml
+influexd/

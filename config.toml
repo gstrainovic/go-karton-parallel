@@ -1,3 +1,6 @@
 URL = "https://www.karton.eu/Unsere-Kartonagen/"
 Domain = "https://www.karton.eu/"
 LinksProDurchlauf = 100
+InfluexUrl = "http://localhost:8086"
+InfluexOrg = "karton.eu"
+InfluexBucket = "karton.eu"

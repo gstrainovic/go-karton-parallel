@@ -24,9 +24,9 @@ func saveData(
 
 	// Add the header row
 	headerRow := sheet.AddRow()
-	headerRow.AddCell().SetValue("H1")
+	headerRow.AddCell().SetValue("Titel")
 	headerRow.AddCell().SetValue("Artikelnummer")
-	headerRow.AddCell().SetValue("Stückzahl pro Palette")
+	headerRow.AddCell().SetValue("Stück pro Palette")
 	
 	linkTexts := getSortedLinkTexts(returnArray)
 	for _, linkText := range linkTexts {
