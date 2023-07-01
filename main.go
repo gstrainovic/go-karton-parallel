@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	// "os"
+	"os"
 	"sync"
 	"time"
 )
@@ -20,6 +20,10 @@ type Value struct {
 }
 
 func main() {
+
+	// exportPriceDifferences()
+	// os.Exit(0)
+
 	startTime := time.Now()
 	conf := getConfig()
 	fmt.Println("Start time:", startTime.Format("2006-01-02 15:04:05.000"))
@@ -49,6 +53,7 @@ func main() {
 	wg.Wait()
 
 	exportAll()
+	exportPriceDifferences()
 
 	fmt.Println("Finished after", time.Since(startTime))
 }
