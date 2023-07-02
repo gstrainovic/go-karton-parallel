@@ -6,8 +6,6 @@ import (
 	"log"
 	"time"
 
-	// "os"
-
 	"github.com/tealeg/xlsx"
 
 	influxdb2 "github.com/influxdata/influxdb-client-go/v2"
@@ -21,10 +19,10 @@ func exportAll() {
 	queryAPI := client.QueryAPI(conf.InfluexOrg)
 
 	query := fmt.Sprintf(`from(bucket: "%s")
-        |> range(start: -24h)
+        |> range(start: -365h)
         |> filter(fn: (r) => r._measurement == "karton.eu")
         |> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
-        |> map(fn: (r) => ({sku: r.sku, anzahl: r.anzahl, preis: r.preis, piecesPerPalette: r.piecesPerPalette, title: r.title}))`, conf.InfluexBucket)
+        |> map(fn: (r) => ({sku: r.sku, anzahl: r.anzahl, preis: r.preis, piecesPerPalette: r.piecesPerPalette, title: r.title , datum: r._time }))`, conf.InfluexBucket)
 	result, err := queryAPI.Query(context.Background(), query)
 	if err != nil {
 		log.Fatal(err)
@@ -43,6 +41,9 @@ func exportAll() {
 	row := sheet.AddRow()
 
 	cell := row.AddCell()
+	cell.Value = "Datum"
+
+	cell = row.AddCell()
 	cell.Value = "Artikelnummer"
 
 	cell = row.AddCell()
@@ -59,6 +60,13 @@ func exportAll() {
 
 	for result.Next() {
 		row = sheet.AddRow()
+
+		cell = row.AddCell()
+		// cell.Value = fmt.Sprintf("%v", result.Record().ValueByKey("datum"))
+		// save to iso8601 format
+		t := result.Record().ValueByKey("datum").(time.Time)
+		cell.Value = t.Format(time.RFC3339)
+
 		
 		cell = row.AddCell()
 		cell.Value = fmt.Sprintf("%v", result.Record().ValueByKey("sku"))
@@ -84,8 +92,6 @@ func exportAll() {
 	}
 
 	fmt.Println("Saved all data to Excel file:", filename)
-
-
 }
 
 func exportPriceDifferences() {
@@ -96,7 +102,7 @@ func exportPriceDifferences() {
     queryAPI := client.QueryAPI(conf.InfluexOrg)
 
 	query := fmt.Sprintf(`from(bucket: "%s")
-		|> range(start: -24h)
+		|> range(start: -365d)
 		|> filter(fn: (r) => r._measurement == "karton.eu")
 		|> pivot(rowKey:["_time"], columnKey: ["_field"], valueColumn: "_value")
 		|> group(columns: ["sku", "anzahl"])

@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"sync"
 	"time"
 )
@@ -20,10 +19,6 @@ type Value struct {
 }
 
 func main() {
-
-	// exportPriceDifferences()
-	// os.Exit(0)
-
 	startTime := time.Now()
 	conf := getConfig()
 	fmt.Println("Start time:", startTime.Format("2006-01-02 15:04:05.000"))
@@ -44,7 +39,7 @@ func main() {
 		go func(links []string, start int, end int) {
 			fmt.Println("Starting range from", start, "to", end)
 			data := getData(links)
-			saveData(data, start, end)
+			// saveData(data, start, end)
 			saveTimeSerie(data, start, end)
 			wg.Done()
 		}(links, start, end)
