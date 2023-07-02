@@ -1,12 +1,29 @@
 package main
 
 import (
+	"encoding/xml"
+	"io/ioutil"
+	"net/http"
 	"strings"
 
 	"github.com/gocolly/colly"
 )
 
+type SitemapIndex struct {
+    Locations []string `xml:"sitemap>loc"`
+}
+
+type Sitemap struct {
+    Locations []string `xml:"url>loc"`
+}
+
 func getLinks(url string) []string {
+
+	// if the url is xml, parse it
+	if strings.Contains(url, ".xml") {
+		return XMLparseURLs(url)
+	}
+
 	domain := getDomain(url)
 	var links []string
 
@@ -26,6 +43,25 @@ func getLinks(url string) []string {
 	}
 
 	return links
+}
+
+func XMLparseURLs(url string) []string {
+	resp, err := http.Get(url)
+    if err != nil {
+        panic(err)
+    }
+    defer resp.Body.Close()
+
+    bytes, err := ioutil.ReadAll(resp.Body)
+    if err != nil {
+        panic(err)
+    }
+
+    var s Sitemap
+    xml.Unmarshal(bytes, &s)
+
+    return s.Locations
+
 }
 
 func getDomain(url string) string {

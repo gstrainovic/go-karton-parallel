@@ -1,6 +1,6 @@
 URLS = [
-    "https://www.karton.eu/Unsere-Kartonagen/",
-    # "https://ecoon.de/product-sitemap.xml" 
+    "https://ecoon.de/product-sitemap.xml/",
+    # "https://www.karton.eu/Unsere-Kartonagen/",
 ]
 LinksProDurchlauf = 100
 AlleExportieren = true

@@ -3,3 +3,4 @@
 .env
 secrets.toml
 influexd/
+logs.txt
