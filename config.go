@@ -2,14 +2,14 @@ package main
 
 import (
 	"os"
-
 	"github.com/BurntSushi/toml"
 )
 
 type Config struct {
-	URL               string
-	Domain            string
+	URLS              []string
 	LinksProDurchlauf int
+	AlleExportieren   bool
+	TeilExporte       bool
 	InfluexUrl        string
 	InfluexOrg        string
 	InfluexBucket     string

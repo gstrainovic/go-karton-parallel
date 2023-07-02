@@ -1,6 +1,10 @@
-URL = "https://www.karton.eu/Unsere-Kartonagen/"
-Domain = "https://www.karton.eu/"
+URLS = [
+    "https://www.karton.eu/Unsere-Kartonagen/",
+    # "https://ecoon.de/product-sitemap.xml" 
+]
 LinksProDurchlauf = 100
+AlleExportieren = true
+TeilExporte = false
 InfluexUrl = "http://localhost:8086"
 InfluexOrg = "karton.eu"
 InfluexBucket = "karton.eu"

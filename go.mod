@@ -3,10 +3,12 @@ module go-karton
 go 1.20
 
 require (
+	github.com/Abramovic/logrus_influxdb v0.0.0-20191225071031-ec7855d61bb9
 	github.com/BurntSushi/toml v1.3.2
 	github.com/PuerkitoBio/goquery v1.8.1
 	github.com/gocolly/colly v1.2.0
 	github.com/influxdata/influxdb-client-go/v2 v2.12.3
+	github.com/sirupsen/logrus v1.9.3
 	github.com/tealeg/xlsx v1.0.5
 )
 
@@ -20,6 +22,7 @@ require (
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/google/go-cmp v0.5.9 // indirect
+	github.com/influxdata/influxdb1-client v0.0.0-20220302092344-a9ab5670611c // indirect
 	github.com/influxdata/line-protocol v0.0.0-20200327222509-2487e7298839 // indirect
 	github.com/kennygrant/sanitize v1.2.4 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
@@ -27,6 +30,7 @@ require (
 	github.com/stretchr/testify v1.8.1 // indirect
 	github.com/temoto/robotstxt v1.1.2 // indirect
 	golang.org/x/net v0.10.0 // indirect
+	golang.org/x/sys v0.8.0 // indirect
 	golang.org/x/text v0.9.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/protobuf v1.30.0 // indirect

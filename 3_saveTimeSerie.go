@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"fmt"
-	"log"
 	"strconv"
 	"time"
 
@@ -16,8 +15,8 @@ func saveTimeSerie(
     start int,
     end int,
 ) {
-
-    fmt.Println("Save range from", start, "to", end)
+    log := getLogger()
+    log.Println("Save range from", start, "to", end)
 
     conf := getConfig()
     secrets := getSecrets()
@@ -50,5 +49,5 @@ func saveTimeSerie(
         }
     }
 
-    fmt.Println("Done saving range from", start, "to", end)
+    log.Println("Done saving range from", start, "to", end)
 }

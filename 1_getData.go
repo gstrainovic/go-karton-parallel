@@ -1,7 +1,6 @@
 package main
 
 import (
-	"log"
 	"strconv"
 	"strings"
 
@@ -10,7 +9,10 @@ import (
 )
 
 func getData(links []string) []Item {
+	log := getLogger()
 	var returnArray []Item
+
+	failedLinks := []string{}
 
 	collector := colly.NewCollector(
 		// colly.Debugger(&debug.LogDebugger{}),
@@ -84,11 +86,22 @@ func getData(links []string) []Item {
 	})
 
 	collector.OnError(func(r *colly.Response, err error) {
-		log.Println("Request URL:", r.Request.URL, "failed with response:", r, "\nError:", err)
+		log.Println("Request URL:", r.Request.URL, "failed with response:")
+		// save the url to parsing again
+		failedLinks = append(failedLinks, r.Request.URL.String())
 	})
 
 	for _, link := range links {
 		collector.Visit(link)
 	}
+
+	if len(failedLinks) > 0 {
+		log.Println("Try again failed links:", failedLinks)
+		for _, link := range failedLinks {
+			collector.Visit(link)
+		}
+	}
+
 	return returnArray
 }
+

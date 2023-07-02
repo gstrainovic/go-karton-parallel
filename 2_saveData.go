@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"os"
 	"sort"
 	"strconv"
@@ -15,6 +14,7 @@ func saveData(
 	start int,	
 	end int,
 	) {
+	log := getLogger()
 	// Create a new Excel file
 	file := xlsx.NewFile()
 	sheet, err := file.AddSheet("Sheet1")
@@ -63,7 +63,7 @@ func saveData(
 		log.Fatal("Error saving Excel file:", err)
 	}
 
-	fmt.Println("Saved range from", start, "to", end)
+	log.Println("Saved range from", start, "to", end)
 
 }
 

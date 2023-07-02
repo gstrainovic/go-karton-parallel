@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"fmt"
-	"log"
 	"time"
 
 	"github.com/tealeg/xlsx"
@@ -12,6 +11,7 @@ import (
 )
 
 func exportAll() {
+	log := getLogger()
 	conf := getConfig()
 	secrets := getSecrets()
 
@@ -62,8 +62,6 @@ func exportAll() {
 		row = sheet.AddRow()
 
 		cell = row.AddCell()
-		// cell.Value = fmt.Sprintf("%v", result.Record().ValueByKey("datum"))
-		// save to iso8601 format
 		t := result.Record().ValueByKey("datum").(time.Time)
 		cell.Value = t.Format(time.RFC3339)
 
@@ -91,10 +89,11 @@ func exportAll() {
 		log.Fatal("Error saving Excel file:", err)
 	}
 
-	fmt.Println("Saved all data to Excel file:", filename)
+	log.Println("Saved all data to Excel file:", filename)
 }
 
 func exportPriceDifferences() {
+	log := getLogger()
     conf := getConfig()
     secrets := getSecrets()
 
@@ -167,6 +166,6 @@ func exportPriceDifferences() {
         log.Fatal("Error saving Excel file:", err)
     }
 
-    fmt.Println("Saved price differences to Excel file:", filename)
+    log.Println("Saved price differences to Excel file:", filename)
 }
 
