@@ -1,9 +1,8 @@
 URLS = [
-    "https://ecoon.de/product-sitemap.xml/",
-    # "https://www.karton.eu/Unsere-Kartonagen/",
+    "https://www.karton.eu/Unsere-Kartonagen/",
 ]
 LinksProDurchlauf = 100
-AlleExportieren = false
+AlleExportieren = true
 TeilExporte = true
 InfluexUrl = "http://localhost:8086"
 InfluexOrg = "karton.eu"
