@@ -3,8 +3,8 @@ URLS = [
     # "https://www.karton.eu/Unsere-Kartonagen/",
 ]
 LinksProDurchlauf = 100
-AlleExportieren = true
-TeilExporte = false
+AlleExportieren = false
+TeilExporte = true
 InfluexUrl = "http://localhost:8086"
 InfluexOrg = "karton.eu"
 InfluexBucket = "karton.eu"

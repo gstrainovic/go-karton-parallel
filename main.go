@@ -55,7 +55,7 @@ func main() {
 			wg.Add(1)
 			go func(links []string, start int, end int) {
 				log.Println("Starting range from", start, "to", end)
-				data := getData(links)
+				data := getDataEcoon(links)
 				if conf.TeilExporte {
 					saveData(data, start, end)
 				}

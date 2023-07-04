@@ -2,7 +2,7 @@ package main
 
 import (
 	"encoding/xml"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"strings"
 
@@ -52,7 +52,7 @@ func XMLparseURLs(url string) []string {
     }
     defer resp.Body.Close()
 
-    bytes, err := ioutil.ReadAll(resp.Body)
+    bytes, err := io.ReadAll(resp.Body)
     if err != nil {
         panic(err)
     }
